@@ -1,0 +1,176 @@
+{
+  "query": "SCID long-term survival",
+  "direct_evidence": [],
+  "background_evidence": [
+    {
+      "pmid": "38367737",
+      "canonical_title": "Relevance of lymphocyte proliferation to PHA in severe combined immunodeficiency (SCID) and T cell lymphopenia",
+      "condition_match": true,
+      "outcome_match": false,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": true,
+      "reason_codes": [
+        "CONDITION_MATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MISMATCH"
+      ],
+      "matched_terms": {
+        "condition": [
+          "scid",
+          "severe combined immunodeficiency",
+          "scid patients"
+        ],
+        "intervention": [],
+        "outcome": [],
+        "population": []
+      }
+    }
+  ],
+  "rejected_evidence": [
+    {
+      "pmid": "32172410",
+      "canonical_title": "Emergency endovascular treatments for delayed hemorrhage after pancreaticobiliary surgery: indications, outcomes, and follow-up of a retrospective cohort",
+      "condition_match": false,
+      "outcome_match": true,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [
+          "survival"
+        ],
+        "population": []
+      }
+    },
+    {
+      "pmid": "33745997",
+      "canonical_title": "Maternal Self-Report of Tetanus Diphtheria Pertussis Vaccination during Pregnancy Correlates with Patient-Specific Electronic Medical Records",
+      "condition_match": false,
+      "outcome_match": false,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MISMATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [],
+        "population": []
+      }
+    },
+    {
+      "pmid": "34217891",
+      "canonical_title": "Incorporation of bacterial immunoevasins to protect cell therapies from host antibody-mediated immune rejection",
+      "condition_match": false,
+      "outcome_match": false,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MISMATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [],
+        "population": []
+      }
+    },
+    {
+      "pmid": "34256789",
+      "canonical_title": "A systematic high-throughput phenotyping assay for sugarcane stalk quality characterization by near-infrared spectroscopy",
+      "condition_match": false,
+      "outcome_match": false,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MISMATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [],
+        "population": []
+      }
+    },
+    {
+      "pmid": "34567890",
+      "canonical_title": "Multiple Primary Malignancies in Head and Neck Cancer: A University Hospital Experience Over a Five-Year Period",
+      "condition_match": false,
+      "outcome_match": true,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [
+          "survival"
+        ],
+        "population": []
+      }
+    },
+    {
+      "pmid": "37890123",
+      "canonical_title": "Impact of Specialized Treatment Setting on Survival in Adolescent and Young Adult ALL",
+      "condition_match": false,
+      "outcome_match": true,
+      "population_match": "not_applicable",
+      "intervention_match": "not_applicable",
+      "eligible_for_direct_answer": false,
+      "eligible_for_background": false,
+      "reason_codes": [
+        "CONDITION_MISMATCH",
+        "INTERVENTION_NOT_APPLICABLE",
+        "OUTCOME_MATCH"
+      ],
+      "matched_terms": {
+        "condition": [],
+        "intervention": [],
+        "outcome": [
+          "survival"
+        ],
+        "population": []
+      }
+    }
+  ],
+  "summary_metrics": {
+    "direct_positives_found": "0 (Recall@5 = NOT_EVALUABLE, Precision@5 = NOT_EVALUABLE, False Negative Rate = NOT_EVALUABLE due to NO_DIRECT_POSITIVE_GROUND_TRUTH in audit set)",
+    "background_correctly_classified": "1/1 (PMID 38367737 correctly classified as eligible_for_background = true, eligible_for_direct_answer = false)",
+    "known_negatives_rejected": "6/6 (PMIDs 34256789, 37890123, 32172410, 34217891, 34567890, 33745997 100% rejected by eligibility logic)",
+    "unsupported_numerical_claims_shown": 0,
+    "wrong_arm_numerical_claims_shown": 0,
+    "precision": "NOT_EVALUABLE (NO_DIRECT_POSITIVE_GROUND_TRUTH)",
+    "recall": "NOT_EVALUABLE (NO_DIRECT_POSITIVE_GROUND_TRUTH)",
+    "false_positive_rate": "0%",
+    "false_negative_rate": "NOT_EVALUABLE (NO_DIRECT_POSITIVE_GROUND_TRUTH)"
+  }
+}

@@ -1,0 +1,141 @@
+================================================================================
+                    圖片問答系統 (Image QA System) 專案維護與開發紀錄
+================================================================================
+建置時間: 2026-08-05
+專案目錄: chat-w-taylor-on-newheights-and-travis-gq-autorag-openaioss
+部署網址: https://image-qa-system.12400583.workers.dev
+
+--------------------------------------------------------------------------------
+一、 對話與需求演進紀錄
+--------------------------------------------------------------------------------
+
+【階段一：專案主題轉換與舊內容清除】
+- 使用者需求：檢查整個專案是否還有提到 Taylor 或 Taylor Swift，把所有相關描述都修正成「圖片問答系統」的描述。
+- 執行內容：
+  1. 修改 package.json、package-lock.json、wrangler.jsonc 中的專案名稱由 taylor-newheights-rag 改為 image-qa-system，Bucket 改為 image-qa-bucket / image-rag-bucket。
+  2. 修改 public/index.html 的 Title、Meta 描述、Loading 動畫標題與副標題。
+  3. 修改 src/client.tsx 中的 Header、IntroSection、Input Placeholder、Footer 與對話框 Icon，去除所有舊音樂與球星相關元素。
+  4. 修改 src/index.ts 與 src/chatState.ts 中的 System Prompt 與 Helper HTML。
+  5. 重新執行打包與驗證。
+
+【階段二：文字 RAG 架構改版為圖片 RAG (Image RAG)】
+- 使用者需求：把專案從「文字文件 RAG」改成「圖片 RAG」，支援 AutoRAG search()、圖片過濾、R2 讀取、看圖 AI 模型解答與前端圖片展示。
+- 執行內容：
+  1. src/chatState.ts：改呼叫 AutoRAG search() 取出檢索到的 Chunk 與原始檔名。
+  2. 篩選檔名為 .png、.jpg、.jpeg、.webp、.gif 的項目，並向 R2 Bucket 讀取圖片原始二進位位元（Uint8Array Bytes）。
+  3. 串接 Workers AI 視覺模型 @cf/meta/llama-4-scout-17b-16e-instruct 與備援模型 @cf/meta/llama-3.2-11b-vision-instruct 進行圖像結合文字問題之解答。
+  4. src/index.ts：新增 GET /image/:filename 路由，負責設定正確 MIME Type 並將 R2 原始圖片傳送給前端。
+  5. src/client.tsx：新增 <img> 標籤展示區塊，當 AI 回答中包含圖片 URL 時於畫面上呈現。
+
+【階段三：Build 與 Cloudflare Deploy 部署優化】
+- 使用者需求：執行 npm run build 與 npm run deploy。
+- 執行內容：
+  1. 修正 wrangler.jsonc 中專案名稱大小寫（image-QA-system 改為全小寫 image-qa-system）。
+  2. 使用 wrangler 指令於 Cloudflare 建立 R2 Bucket (image-rag-bucket)。
+  3. 將 wrangler.jsonc 的 Durable Objects Migration 設定從 new_classes 改為免費方案支援的 new_sqlite_classes。
+  4. 部署至 Cloudflare Workers 成功。
+
+【階段四：AI 回答異常除錯與穩健性提升】
+- 使用者需求：反應 AI 不會回答問題。
+- 執行內容：
+  1. 修正 src/chatState.ts：將 AutoRAG 檢索加上 try...catch 容錯，防止因 AutoRAG 找不到實例而導致整個 Worker 崩潰。
+  2. 設定多重模型自動備援（Vision Models ➔ Text Models），當無圖片或看圖失敗時降級為純文字 AI 模型回答。
+  3. 修正前端 src/client.tsx 接收訊息的邏輯，確保一定能繪製出 AI 的回覆訊息。
+
+【階段五：回答格式與圖片排版調整】
+- 使用者需求：希望 AI 回答時展示圖片與圖片講解。
+- 執行內容：
+  1. 修改 src/client.tsx：調整 MessageBubble 內部渲染順序，將圖片置於文字說明上方（圖片在上，講解在下）。
+  2. 設定 white-space: pre-wrap 確保換行與段落清晰。
+  3. 修改 src/chatState.ts 中的 Prompt，引導 AI 結構化輸出圖片特徵說明與詳細問題解答。
+
+【階段六：無圖片匹配問題與 R2 桶處理】
+- 使用者需求：反應沒有貼出照片（AutoRAG Indexed 檔案數為 0）。
+- 執行內容：
+  1. 分析 Cloudflare AI Search 控制台，發現純圖片檔缺乏文字 Embeddings 導致 Indexed 數量為 0。
+  2. 在 src/chatState.ts 中實現 R2 Bucket 自動備援機制（當 AutoRAG 未回傳圖片檔名時，直讀 R2 Bucket 中的圖片）。
+  3. 提供使用者圖片壓縮、降尺寸與建立同名 .txt 說明檔的最佳實踐說明。
+
+【階段七：響應式網頁設計 (RWD)】
+- 使用者需求：希望有 RWD 效果。
+- 執行內容：
+  1. 修改 src/client.tsx：對 MessageBubble、InputContainer、Header、IntroSection 加入 Mobile Media Queries (max-width: 600px)。
+  2. 移動端訊息氣泡最大寬度擴展至 90%，圖片最大高度限制為 250px / 360px 避免洗版。
+  3. 調整按鈕與輸入框在手機畫面下的排版與間距。
+
+【階段八：多圖輪播切換、馬卡龍綠主題與 Emoji 清除】
+- 使用者需求：如果圖片太多請讓他可以左右切換照片，把版面變為馬卡龍綠色與白色，不要有任何 EMOJI。
+- 執行內容：
+  1. src/client.tsx：新增 ImageCarousel 輪播元件，提供 < 和 > 按鈕與頁數計數器（如 1 / 3），支援多圖左右切換。
+  2. 全面更新主題色調為馬卡龍薄荷綠 (#e8f5e9 / #f0f7f2) 與乾淨白底 (#ffffff)，搭配深綠字體 (#2e4d3a)。
+  3. public/index.html 與 src/client.tsx 完全清除所有 Emoji 符號。
+
+【階段九：介面細節修飾】
+- 使用者需求：把「圖片問答與智能分析助手」那行標題與「歡迎使用圖片問答系統...」區塊格子刪除。
+- 執行內容：刪除 src/client.tsx 中的 IntroSection 元素，使畫面更簡潔直接。
+
+【階段十：長文字輸出優化 (解決中斷問題)】
+- 使用者需求：反應 AI 沒有回答完、要求提高可回答的字數。
+- 執行內容：
+  1. 修改 src/chatState.ts：將呼叫 AI 模型時的 max_tokens 從 2048 提高至 4096（約 3000~4000 字）。
+  2. Prompt 加入「請提供極其詳細且完整長度的解答，切勿簡略或中斷」的系統指令。
+
+【階段十一：圖片放大與點擊燈箱 (Modal/Lightbox)】
+- 使用者需求：圖片放大 150%、希望點擊圖片可以放大。
+- 執行內容：
+  1. src/client.tsx：圖片加入 transform: scale(1.5) 置中放大。
+  2. 新增 ModalOverlay 與 ModalImage 全螢幕燈箱元件，點擊參考圖片可彈出全螢幕大圖放大檢視，鼠標支援 zoom-in / zoom-out。
+
+【階段十二：繁體字規範與冗餘聲明過濾】
+- 使用者需求：回答時請使用繁體字，不要有評分標準/引導文字，不要讓 AI 回答「【圖片】：無提供」、「【參考資料】：無提供」。
+- 執行內容：
+  1. System Prompt 與 User Prompt 設定規範強制使用台灣繁體字與習慣用語。
+  2. 禁止 AI 在回答中印出評分標準、評分關鍵字與 Prompt 引導。
+  3. 後端 extractText() 加入正則表達式，自動過濾並移除「【圖片】：無提供」、「【參考資料】：無提供」等無效聲明標籤。
+
+【階段十三：精準圖片匹配 (解決無關圖片問題)】
+- 使用者需求：圖片跟我問的問題沒關係。
+- 執行內容：
+  1. 修改 src/chatState.ts：廢除「隨機取 R2 圖片當備援」的機制。
+  2. 當 AutoRAG 未搜尋到圖片時，嚴格解析問題關鍵字比對 R2 檔名，只有在關鍵字真正匹配時才帶出圖片，若完全無關則不顯示無關照片。
+
+【階段二十二：優化生動創意解答 Prompt 與 Markdown 格式正常顯示】
+- 使用者需求：希望他還是這樣回答（如針對「我是八隻腳外星人，請問洗手程序是？」等創意問題，依然能結合圖片資料提供豐富、結構化且生動擬真的詳細解答，並正確渲染 Markdown）。
+- 執行內容：
+  1. src/chatState.ts 提示詞優化：
+     - System & User Prompt 指示 AI 發揮創意，當使用者有特定情境設定（如外星人或特殊設定）時，靈活結合圖片/參考資料知識，提供結構化（清晰標題與步驟清單）、生動且豐富長度的詳細解答。
+  2. 前端 Markdown 渲染解析器 (`renderFormattedMarkdown`) 確認解析運作正常，並已發布最新版本。
+
+
+--------------------------------------------------------------------------------
+二、 專案架構與檔案變更總覽
+--------------------------------------------------------------------------------
+
+1. wrangler.jsonc
+   - 專案名稱: image-qa-system
+   - R2 Bucket 綁定: image-rag-bucket (Binding: R2_BUCKET)
+   - Durable Objects: ChatState (Migration: new_sqlite_classes)
+
+2. src/chatState.ts (後端核心對話與 RAG 邏輯)
+   - 整合 AutoRAG search("image-rag")。
+   - 二進位位元圖片讀取 (R2_BUCKET.get)。
+   - 支援 max_tokens: 4096、繁體中文輸出規範、正則表達式標籤過濾。
+   - 問題關鍵字精準匹配，避免無關圖片干擾。
+
+3. src/index.ts (Workers 入口與 API 路由)
+   - 綁定 R2_BUCKET、BROWSER、AI、CHAT_STATE。
+   - 提供 GET /image/:filename 原始圖片 Serve 路由與對應 MIME Header。
+
+4. src/client.tsx (前端 React 應用程式)
+   - 馬卡龍綠與純白簡約風配色。
+   - 內建 ImageCarousel 多圖左右切換輪播組件。
+   - 內建點擊圖片全螢幕大圖 Modal 燈箱。
+   - 支援 Mobile / Desktop 全響應式網頁設計 (RWD)。
+
+5. public/index.html & public/bundle.js
+   - index.html: 馬卡龍綠背景與無 Emoji 乾淨樣式。
+   - bundle.js: 由 esbuild 打包產出之精簡前端檔案。
+
+================================================================================
+                                紀錄結束
+================================================================================

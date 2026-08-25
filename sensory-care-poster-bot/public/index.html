@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圖片問答系統 | Image QA System</title>
+  
+  <!-- SEO and Social Meta Tags -->
+  <meta name="description" content="圖片問答系統 - 基於 AI 的智能圖片分析與問答平台">
+  <meta name="keywords" content="圖片問答系統, Image QA, AI, 圖片分析, 圖像問答">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="圖片問答系統 | Image QA System">
+  <meta property="og:description" content="基於 AI 的智能圖片分析與問答平台">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="圖片問答系統">
+  <meta name="twitter:description" content="基於 AI 的智能圖片分析與問答平台">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #e8f5e9;
+      color: #2e4d3a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    #root {
+      height: 100vh;
+      position: relative;
+    }
+    
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #2e4d3a;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .loading-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid #c8e6c9;
+      box-shadow: 0 4px 20px rgba(46, 77, 58, 0.08);
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e8f5e9;
+      border-top: 4px solid #81c784;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: #2e4d3a;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    
+    .loading-subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #558b2f;
+      font-weight: 500;
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="loading">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">圖片問答系統</div>
+        <div class="loading-subtitle">智能分析，精準解答 載入中...</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Your bundled app -->
+  <script src="/bundle.js"></script>
+</body>
+</html>
+  
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Your bundled app -->
+  <script src="/bundle.js"></script>
+</body>
+</html>

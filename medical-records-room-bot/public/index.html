@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏥 台大醫院病歷申請查詢 RAG 系統 ⚕️</title>
+  
+  <!-- SEO and Social Meta Tags -->
+  <meta name="description" content="🏥 台大醫院病歷申請查詢 RAG 系統 - 快速查詢病歷申請相關規定、流程與常見問題 ⚕️">
+  <meta name="keywords" content="台大醫院, 病歷申請, 查詢, 醫療, RAG系統, AI, NTUH">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="🏥 台大醫院病歷申請查詢 RAG 系統 ⚕️">
+  <meta property="og:description" content="台大醫院病歷申請查詢 RAG 系統 - 快速查詢病歷申請相關規定、流程與常見問題 🏥">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🏥 台大醫院病歷申請查詢 RAG 系統 ⚕️">
+  <meta name="twitter:description" content="台大醫院病歷申請查詢 RAG 系統 - 快速查詢病歷申請相關規定、流程與常見問題 🏥">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 50%, #80deea 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    #root {
+      height: 100vh;
+      position: relative;
+    }
+    
+    /* Enhanced Loading state */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #006064;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .loading-container {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 150, 136, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(0, 150, 136, 0.2);
+      border-top: 4px solid #009688;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: #00796b;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    
+    .loading-subtitle {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #004d40;
+      font-weight: 500;
+    }
+
+    /* Performance optimizations */
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="loading">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">🏥 台大醫院病歷申請查詢 RAG 系統載入中</div>
+        <div class="loading-subtitle">正在準備相關規定...</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Your bundled app -->
+  <script src="/bundle.js"></script>
+</body>
+</html>

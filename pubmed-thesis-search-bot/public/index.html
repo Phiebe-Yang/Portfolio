@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PubMed BigQuery 醫學問答機器人</title>
+  
+  <!-- SEO and Social Meta Tags -->
+  <meta name="description" content="PubMed BigQuery 醫學問答機器人，串接 Google BigQuery 檢索生醫論文與 AI 問答">
+  <meta name="keywords" content="PubMed, BigQuery, 醫學問答, 生醫論文, AI, Cloudflare Workers">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PubMed BigQuery 醫學問答機器人">
+  <meta property="og:description" content="串接 Google BigQuery 檢索 PubMed 生醫文獻資料庫與 AI 智慧問答">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231e3a8a%22/><text x=%2250%25%22 y=%2265%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22bold%22 font-size=%2250%22>PM</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      color: #1e293b;
+    }
+    
+    #root {
+      height: 100vh;
+      height: 100dvh;
+      min-height: 100svh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+      .loading-container {
+        width: calc(100% - 32px);
+        padding: 28px 20px;
+      }
+
+      .loading-text {
+        font-size: 1.05rem;
+      }
+    }
+    
+    /* Loading state */
+    .loading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #1e3a8a;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .loading-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #2563eb;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-text {
+      color: #1e3a8a;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .loading-subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+    
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div class="loading">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">PubMed BigQuery 醫學問答機器人</div>
+        <div class="loading-subtitle">系統載入中...</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- React CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  
+  <!-- Your bundled app -->
+  <script src="/bundle.js"></script>
+</body>
+</html>

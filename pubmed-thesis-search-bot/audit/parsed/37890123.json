@@ -1,0 +1,20 @@
+{
+  "pmid": "37890123",
+  "title": "Impact of Specialized Treatment Setting on Survival in Adolescent and Young Adult ALL",
+  "journal": "JCO oncology practice",
+  "publication_date": "2023 Dec",
+  "doi": "10.1200/OP.23.00373",
+  "mesh_terms": [
+    "Adolescent",
+    "Female",
+    "Humans",
+    "Male",
+    "Young Adult",
+    "Medically Uninsured",
+    "Proportional Hazards Models",
+    "Survival Rate",
+    "Adult",
+    "Precursor Cell Lymphoblastic Leukemia-Lymphoma"
+  ],
+  "abstract": "Unlike children with ALL who receive cancer care primarily at specialized cancer centers (SCCs; National Cancer Institute and/or Children's Oncology Group centers), adolescents and young adults (AYAs; 15-39 years) receive care in a variety of settings. Using population-based data, we describe where AYAs with ALL receive treatment and determine associations with overall survival (OS). Data from the 2004 to 2018 California (CA, n = 2,283), New York (NY, n = 795), and Texas (TX, n = 955) state cancer registries were used to identify treatment setting of AYAs with newly diagnosed ALL. Multivariable Cox proportional hazards regression models evaluated associations with OS. Seventy percent were older than 18 years, and 65% were male. A majority in CA (63%) and TX (64%) were Hispanic while most in NY were non-Hispanic White (50%). Treatment at an SCC occurred in 48.2% (CA), 44.4% (NY), and 19.5% (TX). Across states, AYAs who were older or uninsured were less likely to receive treatment at an SCC. Treatment at an SCC was associated with superior OS in CA (hazard ratio [HR], 0.73; 95% CI, 0.63 to 0.85) and TX (HR, 0.61; 95% CI, 0.45 to 0.83); a nonsignificant association was seen in NY (HR, 0.83; 95% CI, 0.64 to 1.08). Only 20%-50% of AYA patients with ALL received frontline treatment at SCCs. Treatment of ALL at an SCC was associated with superior survival, highlighting the importance of policy efforts to improve access and reduce inequities in AYA ALL care."
+}

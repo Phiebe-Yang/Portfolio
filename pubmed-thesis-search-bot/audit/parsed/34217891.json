@@ -1,0 +1,14 @@
+{
+  "pmid": "34217891",
+  "title": "Incorporation of bacterial immunoevasins to protect cell therapies from host antibody-mediated immune rejection",
+  "journal": "Molecular therapy : the journal of the American Society of Gene Therapy",
+  "publication_date": "2021 Dec 01",
+  "doi": "10.1016/j.ymthe.2021.06.022",
+  "mesh_terms": [
+    "Humans",
+    "Immunoglobulin G",
+    "Phagocytosis",
+    "Receptors, Chimeric Antigen"
+  ],
+  "abstract": "Cellular therapies are engineered using foreign and synthetic protein sequences, such as chimeric antigen receptors (CARs). The frequently observed humoral responses to CAR T&#xa0;cells result in rapid clearance, especially after re-infusions. There is an unmet need to protect engineered cells from host-versus-graft rejection, particularly for the advancement of allogeneic cell therapies. Here, utilizing the immunoglobulin G (IgG) protease \"IdeS,\" we programmed CAR T&#xa0;cells to defeat humoral immune attacks. IdeS cleavage of host IgG averted Fc-dependent phagocytosis and lysis, and the residual F(ab')2 fragments remained on the surface, providing cells with an inert shield from additional IgG deposition. \"Shield\" CAR T&#xa0;cells efficiently cleaved cytotoxic IgG, including anti-CAR antibodies, detected in patient samples and provided effective anti-tumor activity in the presence of anti-cell IgG in&#xa0;vivo. This technology may be useful for repeated human infusions of engineered cells, more complex engineered cells, and expanding widespread use of \"off-the-shelf\" allogeneic cellular therapies."
+}

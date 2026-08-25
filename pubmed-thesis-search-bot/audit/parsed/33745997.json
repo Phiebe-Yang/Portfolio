@@ -1,0 +1,24 @@
+{
+  "pmid": "33745997",
+  "title": "Maternal Self-Report of Tetanus Diphtheria Pertussis Vaccination during Pregnancy Correlates with Patient-Specific Electronic Medical Records",
+  "journal": "The Journal of pediatrics",
+  "publication_date": "2021 Jul",
+  "doi": "10.1016/j.jpeds.2021.03.015",
+  "mesh_terms": [
+    "Adolescent",
+    "Adult",
+    "Diphtheria-Tetanus-acellular Pertussis Vaccines",
+    "Electronic Health Records",
+    "Female",
+    "Health Care Surveys",
+    "Humans",
+    "Logistic Models",
+    "Multivariate Analysis",
+    "New York City",
+    "Pregnancy",
+    "Self Report",
+    "Vaccination Coverage",
+    "Young Adult"
+  ],
+  "abstract": "To evaluate the concordance between maternal report of antepartum tetanus, diphtheria, pertussis (Tdap) vaccination and vaccination status documented in the electronic medical record (EMR), as well as factors associated with discordance. A survey was completed by a convenience sample of postpartum patients in a New York metropolitan hospital. The survey collected patients' demographic information, health beliefs, and whether they received Tdap vaccine during this pregnancy. The patient's Tdap vaccination status was abstracted from the EMR, a combination of data gathered from the obstetrician and patient's hospital record. Kappa statistics measured the agreement between maternal report and EMR on antepartum Tdap vaccination. Univariate and multivariable logistic regression analyses were performed to identify maternal characteristics associated with discordance. Of the 1571 patients with Tdap status available in the EMR, 1549 patients (92%) reported on receipt status for Tdap vaccination during pregnancy; 1328 maternal reports (86%) agreed with the EMR for Tdap status (kappa&#xa0;=&#xa0;0.72, 95% CI 0.68-0.75). Several factors were statistically significant in multivariable analyses: lower income was associated with greater discordance (ie, overreporting; P&#xa0;=&#xa0;.02), as well as certain health beliefs including \"Pregnant women should be concerned about the possibility of pertussis in their babies\" (aOR 2.86, 95% CI 1.02-8.04) and \"My friends would probably think getting a Tdap vaccine is a good idea\" (aOR 2.36, 95% CI 1.11-4.99). Maternal recall of Tdap vaccination during pregnancy is consistent with the EMR. This supports the value of maternal report in determining Tdap vaccination status, which is especially important when vaccination records are not available."
+}
