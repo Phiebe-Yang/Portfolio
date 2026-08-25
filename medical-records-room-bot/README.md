@@ -1,19 +1,28 @@
 # 🏥 台大醫院病歷申請查詢 RAG 機器人
 
+**🔗 Live Demo：[medical-records-room-bot.12400583.workers.dev](https://medical-records-room-bot.12400583.workers.dev)**
+
 醫院實習期間開發的 AI 問答系統，讓民眾用自然語言詢問「病歷摘要/複製本申請」的相關規定與流程，取代翻閱冗長公告與 PDF 表單。系統會依據台大醫院官方公告與常見問答，透過 RAG（檢索增強生成）給出有依據的回答。
 
 > 本專案為醫院實習作品，非台大醫院官方系統，僅供學習與作品展示使用。
 
 ## 功能
 
-- 用中文自然語言提問病歷申請規定（如：「委託他人申請病歷需要準備什麼文件？」）
+- 用中文自然語言提問病歷申請規定，例如：「詢問有關台大醫院病歷申請的規定或常見問題」
 - 依申請情境（現場 / email / 傳真、保險公司調閱、英文證明書…）給出對應流程與所需文件
 - 回答附上引用來源，避免模型憑空捏造
-- 對話式介面，可追問細節
+- 對話式介面，可持續追問細節
+
+## 系統運作方式
+
+1. 官方病歷申請公告、申請書格式、常見問答先整理成 Markdown，上傳到 Cloudflare R2
+2. Cloudflare AutoRAG 對這批文件建立向量索引
+3. 使用者提問時，AutoRAG 檢索最相關的段落，交給 Workers AI 上的 LLM（`gpt-oss-120b`）生成有依據的回答
+4. Durable Objects 保存每個使用者的對話狀態，讓多輪追問維持上下文
 
 ## 資料來源與知識庫建置
 
-`data/` 內為台大醫院官方病歷申請相關公告、申請書格式與常見問答資料，由 [@TeemoNTUH](https://github.com/TeemoNTUH) 提供，經過整理轉換為 Markdown 後餵給 AutoRAG 建立知識庫：
+`data/` 內為台大醫院官方病歷申請相關公告、申請書格式與常見問答資料，經過整理轉換為 Markdown 後餵給 AutoRAG 建立知識庫：
 
 - `data/org/` — 原始 PDF / HTML 公告（官方申請書、規定）
 - `data/fin/`、`data/type/`、`data/normal/`、`data/Q&A/`、`data/same/` — 整理後的 Markdown 知識庫內容與問答集
@@ -24,7 +33,7 @@
 
 | 元件 | 用途 |
 |---|---|
-| Cloudflare Workers | Serverless 後端 / API |
+| Cloudflare Workers | Serverless 後端 / API，同時提供線上 Demo |
 | Durable Objects | 對話狀態管理 |
 | R2 Storage | 知識庫文件儲存 |
 | Workers AI | 模型推論（`@cf/openai/gpt-oss-120b`） |
@@ -51,6 +60,12 @@ npm run build
 wrangler deploy
 ```
 
+## 已知限制與未來規劃
+
+- 知識庫內容以現行公告為準，若院方規定調動需手動更新資料並重新索引
+- 目前僅涵蓋病歷摘要/複製本申請，未涵蓋其他病歷室服務項目
+- 規劃：加入使用者滿意度回饋機制，用於後續優化回答品質
+
 ## 專案背景
 
-本專案透過 `git clone` [chat-w-taylor-on-newheights-and-travis-gq-autorag-openaioss](https://github.com/elizabethsiegle/chat-w-taylor-on-newheights-and-travis-gq-autorag-openaioss)（示範如何用 Cloudflare Workers + AutoRAG 打造 RAG 聊天機器人的開源範例）為起點，在醫院實習期間重新設計資料管線、前端介面與問答內容，改造為病歷申請查詢用途。資料由 [@TeemoNTUH](https://github.com/TeemoNTUH) 提供。
+本專案透過 `git clone` [chat-w-taylor-on-newheights-and-travis-gq-autorag-openaioss](https://github.com/elizabethsiegle/chat-w-taylor-on-newheights-and-travis-gq-autorag-openaioss)（示範如何用 Cloudflare Workers + AutoRAG 打造 RAG 聊天機器人的開源範例）為起點，在醫院實習期間重新設計資料管線、前端介面與問答內容，改造為病歷申請查詢用途。測試與合成資料由 [@TeemoNTUH](https://github.com/TeemoNTUH) 提供。

@@ -1,29 +1,42 @@
 # 🎬 頭頸癌標靶藥物治療 - 影音 RAG 智慧問答系統
 
-醫院實習期間開發的衛教影片問答系統。病人或家屬觀看《頭頸癌標靶藥物治療》衛教影片時，可直接用自然語言提問（如副作用、藥物種類、作用機制），系統會結合逐字稿內容準確回答，並**自動將影片跳轉到最相關的字幕時間點**，不必整支影片重看一遍找答案。
+**🔗 Live Demo：[targeted-therapy-video-bot.12400583.workers.dev](https://targeted-therapy-video-bot.12400583.workers.dev)**
+
+醫院實習期間開發的衛教影片問答系統。病人或家屬觀看《頭頸癌標靶藥物治療》衛教影片時，可直接用自然語言提問，系統會結合逐字稿內容準確回答，並**自動將影片跳轉到最相關的字幕時間點**，不必整支影片重看一遍找答案。
 
 > 本專案為醫院實習作品，僅供學習與作品展示使用。影片內容為衛教用途，非醫療建議。
 
 ## 功能
 
 - 影片 + 逐字稿同步播放，AI 回答後自動跳轉到對應時間點
-- 針對標靶治療常見問題提供衛教助理式回答（副作用、藥物種類、適用階段、與化療的差異等）
+- 針對標靶治療常見問題提供衛教助理式回答，例如：
+  - 標靶治療常見的副作用有哪些？
+  - 頭頸癌在什麼階段適合進行標靶治療？
+  - 標靶治療與傳統化學治療有什麼不同？
+  - 標靶治療會影響哪些身體器官或功能？
 - 對話式介面，可持續追問
 
-## 資料來源與逐字稿處理流程
+## 系統運作方式
 
-原始衛教影片由 [@TeemoNTUH](https://github.com/TeemoNTUH) 提供。`mp4_to_transcript.py`、`update_transcript.py`、`update_transcript_v2.py` 是將影片轉成可檢索逐字稿、並切分成有時間戳的段落供前端跳轉使用的工具：
+1. 衛教影片先用 `faster-whisper` 轉成逐字稿，再依內容切分成有時間戳的段落
+2. 逐字稿段落上傳到 Cloudflare R2，由 AutoRAG 建立索引
+3. 使用者提問時，AutoRAG 檢索最相關的段落，交給 Workers AI 上的 LLM（`gpt-oss-120b`）生成回答
+4. 前端依回答所引用的段落時間戳，自動將影片播放進度跳轉到對應位置
+
+## 逐字稿處理流程
+
+測試與合成資料由 [@TeemoNTUH](https://github.com/TeemoNTUH) 提供。以下工具用於將影片轉成可檢索逐字稿：
 
 - `mp4_to_transcript.py` — 用 `faster-whisper` 將影片轉成逐字稿（`.srt` + `.txt`）
 - `update_transcript.py` / `update_transcript_v2.py` — 將逐字稿依內容切分為有標題、起訖秒數的段落（`src/transcriptData.ts`），供前端點選/跳轉使用
 
-> 影片原始檔（`頭頸癌標靶治療指南.mp4`，約 38MB）未包含在此 repo 中；如需展示，建議另外上傳到 YouTube（可設不公開）或雲端硬碟，並在此 README 附上連結。
+> 影片原始檔（`頭頸癌標靶治療指南.mp4`，約 38MB）未包含在此 repo 中；歡迎直接透過上方 Live Demo 觀看。
 
 ## 技術架構 (Cloudflare)
 
 | 元件 | 用途 |
 |---|---|
-| Cloudflare Workers | Serverless 後端 / API |
+| Cloudflare Workers | Serverless 後端 / API，同時提供線上 Demo |
 | Durable Objects | 對話狀態管理 |
 | R2 Storage | 逐字稿與衛教資料儲存 |
 | Workers AI | 模型推論（`@cf/openai/gpt-oss-120b`） |
@@ -44,6 +57,11 @@ wrangler r2 bucket create head-neck-video-rag
 npm run build
 wrangler deploy
 ```
+
+## 已知限制與未來規劃
+
+- 逐字稿時間戳段落目前為手動切分，影片較長時需人工核對切點是否合理
+- 規劃：支援多支衛教影片，並讓使用者提問時可跨影片查找相關段落
 
 ## 專案背景
 
